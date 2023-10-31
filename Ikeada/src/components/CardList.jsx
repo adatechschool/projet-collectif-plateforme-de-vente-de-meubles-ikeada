@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 
-import { Link } from 'react-router-dom';
 
 import ProductPage from './ProductPage'
 import { Stack } from 'react-bootstrap';
