@@ -5,6 +5,8 @@ import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
 
+import { HouseDoorFill, PersonFill } from 'react-bootstrap-icons';
+
 function NavBar() {
   return (
     <Navbar expand="lg" className="bg-body-tertiary">
@@ -25,8 +27,8 @@ function NavBar() {
           {/* <Button variant="outline-success">Search</Button> /// A remettre selon le besoin */}
         </Form>
         <Nav>
-          <Nav.Link href="#action2">Profil</Nav.Link>
-          <Nav.Link href="#action1">Home</Nav.Link>
+          <Nav.Link href="#action2"><PersonFill size={25} /></Nav.Link>
+          <Nav.Link href="#action1"><HouseDoorFill size={25} /></Nav.Link>
         </Nav>
       </Container>
     </Navbar>
