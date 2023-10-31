@@ -107,3 +107,129 @@ app.post('/api/stuff', async (req, res) => {
     res.send("created!!");
 });
 ```
+
+## Structure des données DB 
+
+1. Salon
+
+Canapés
+
+Fauteuils
+
+Tables basses
+
+Étagères de salon
+
+Lampadaires
+
+2. Salle à manger
+
+Tables de salle à manger
+
+Chaises de salle à manger
+
+Buffets et vaisseliers
+
+Bars et tabourets de bar
+
+3. Chambre à coucher
+
+Lits
+
+Matelas
+
+Commodes
+
+Armoires
+
+Tables de chevet
+
+4. Bureau
+
+Bureaux
+
+Chaises de bureau
+
+Étagères de bureau
+
+Lampes de bureau
+
+5. Cuisine
+
+Tables de cuisine
+
+Chaises de cuisine
+
+Îlots de cuisine
+
+Ustensiles de cuisine
+
+6. Extérieur
+
+Meubles de jardin
+
+Salons de jardin
+
+Parasols et auvents
+
+Coussins extérieurs
+
+7. Salle de bains
+
+Meubles sous lavabo
+
+Étagères de salle de bains
+
+Miroirs de salle de bains
+
+Accessoires de salle de bains
+
+8. Décoration
+
+Luminaires
+
+Tapis
+
+Coussins et couvertures
+
+Objets décoratifs
+
+9. Enfants et Bébés
+
+Lits pour enfants
+
+Chaises hautes
+
+Tables et chaises pour enfants
+
+Décoration pour la chambre d'enfants
+
+10. Rangement
+
+Étagères
+
+Armoires de rangement
+
+Boîtes de rangement
+
+Paniers
+
+11. Éclairage
+
+Suspensions
+
+Appliques murales
+
+Lampes de table
+
+Lampadaires
+
+12. Meubles modulaires
+
+Systèmes de rangement modulaires
+
+Canapés modulaires
+
+Étagères évolutives
+
+Tables extensibles
