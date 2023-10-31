@@ -1,16 +1,16 @@
 import { useState, useEffect } from 'react'
 import NavBar from './NavBar'
 import './App.css'
-import ProductPage from './components/ProductPage'
 
+import ProductPage from './components/ProductPage'
 import { Stack } from 'react-bootstrap';
 
 
-function App() {
+function ItemCards() {
   const [jsonData, setJsonData] = useState(null);
 
   useEffect(() => {
-    fetch('../jsonTest/item.json')
+    fetch('./jsonTest/item.json')
       .then(response => response.json())
       .then(data => setJsonData(data))
       .catch(error => console.error('Erreur de chargement du JSON :', error));
@@ -20,7 +20,6 @@ function App() {
 
   return (
     <>
-      <NavBar />
       {jsonData && 
       <>
       <Stack direction="vertical" gap={3}>
@@ -32,4 +31,4 @@ function App() {
   )
 }
 
-export default App
+export default ItemCards

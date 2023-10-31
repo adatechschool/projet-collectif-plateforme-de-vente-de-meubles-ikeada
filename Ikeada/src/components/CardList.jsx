@@ -1,20 +1,32 @@
-import { Card } from 'react-bootstrap'
-import { Button } from 'react-bootstrap'
-import { Link } from 'react-router-dom'
+import { useState, useEffect } from 'react';
 
+import { Link } from 'react-router-dom';
 
-export default function ProductPage() {
+import ProductPage from './ProductPage'
+import { Stack } from 'react-bootstrap';
+
+export default function CardList() {
+    const [jsonData, setJsonData] = useState(null);
+
+    useEffect(() => {
+      fetch('../../public/jsonTest/item.json')
+        .then(response => response.json())
+        .then(data => {
+            console.log(data); 
+            setJsonData(data);
+          })
+        .catch(error => console.error('Erreur de chargement du JSON :', error));
+    }, []);
+    
     return (
-        <Card>
-            <Card.Img variant="top" src="holder.js/100px180" />
-            <Card.Body>
-                <Card.Title>test</Card.Title>
-                <Card.Text>
-                    Some quick example text to build on the card title and make up the
-                    bulk of the card content.
-                </Card.Text>
-                <Link to="/product-page"><Button variant="primary" >Go somewhere</Button></Link>
-            </Card.Body>
-        </Card>
-    )
+        <>
+          {jsonData && 
+          <>
+          <Stack direction="vertical" gap={3}>
+              {jsonData.item.map((product) => (
+                <ProductPage data={product} />
+              ))}
+            </Stack></>}
+        </>
+      )
 }
