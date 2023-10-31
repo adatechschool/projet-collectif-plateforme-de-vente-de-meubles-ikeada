@@ -1,0 +1,86 @@
+{
+  "hash": "593a10b1",
+  "browserHash": "3d013be8",
+  "optimized": {
+    "react": {
+      "src": "../../node_modules/react/index.js",
+      "file": "react.js",
+      "fileHash": "4cf2a574",
+      "needsInterop": true
+    },
+    "react-dom/client": {
+      "src": "../../node_modules/react-dom/client.js",
+      "file": "react-dom_client.js",
+      "fileHash": "c402e371",
+      "needsInterop": true
+    },
+    "react-bootstrap/Button": {
+      "src": "../../node_modules/react-bootstrap/esm/Button.js",
+      "file": "react-bootstrap_Button.js",
+      "fileHash": "b7aefdc5",
+      "needsInterop": false
+    },
+    "react-bootstrap/Container": {
+      "src": "../../node_modules/react-bootstrap/esm/Container.js",
+      "file": "react-bootstrap_Container.js",
+      "fileHash": "fcfc5d15",
+      "needsInterop": false
+    },
+    "react-bootstrap/Form": {
+      "src": "../../node_modules/react-bootstrap/esm/Form.js",
+      "file": "react-bootstrap_Form.js",
+      "fileHash": "5d1d8db9",
+      "needsInterop": false
+    },
+    "react-bootstrap/Nav": {
+      "src": "../../node_modules/react-bootstrap/esm/Nav.js",
+      "file": "react-bootstrap_Nav.js",
+      "fileHash": "76118f14",
+      "needsInterop": false
+    },
+    "react-bootstrap/Navbar": {
+      "src": "../../node_modules/react-bootstrap/esm/Navbar.js",
+      "file": "react-bootstrap_Navbar.js",
+      "fileHash": "0964c15c",
+      "needsInterop": false
+    },
+    "react-bootstrap/NavDropdown": {
+      "src": "../../node_modules/react-bootstrap/esm/NavDropdown.js",
+      "file": "react-bootstrap_NavDropdown.js",
+      "fileHash": "f90116ee",
+      "needsInterop": false
+    }
+  },
+  "chunks": {
+    "chunk-MDIHFEFG": {
+      "file": "chunk-MDIHFEFG.js"
+    },
+    "chunk-WLDD55NS": {
+      "file": "chunk-WLDD55NS.js"
+    },
+    "chunk-7T6WH3EZ": {
+      "file": "chunk-7T6WH3EZ.js"
+    },
+    "chunk-CFX3HGLQ": {
+      "file": "chunk-CFX3HGLQ.js"
+    },
+    "chunk-Q7ZCDTJA": {
+      "file": "chunk-Q7ZCDTJA.js"
+    },
+    "chunk-MVRJAZH5": {
+      "file": "chunk-MVRJAZH5.js"
+    },
+    "chunk-QBOERDGK": {
+      "file": "chunk-QBOERDGK.js"
+    },
+    "chunk-DURZKLVH": {
+      "file": "chunk-DURZKLVH.js"
+    },
+    "chunk-MALAIQHF": {
+      "file": "chunk-MALAIQHF.js"
+    },
+    "chunk-L7APZED3": {
+      "file": "chunk-L7APZED3.js"
+    }
+  }
+}
