@@ -94,6 +94,18 @@ app.use("/admin/*", checkAuth, checkAdmin, (req, res, next) => {
   next();
 });
 
+//route qui renvoie les données de la table ITEM
+app.get("/ITEM", async (req, res) => {
+  const { data, error } = await supabase.from("ITEM").select();
+  res.send(data);
+});
+
+// route qui renvoie la donnée ID de la table ITEM
+app.get("/ITEM/:id", async (req, res) => {
+  const { data, error } = await supabase.from("ITEM").select("id");
+  res.send(data);
+});
+
 // Routing de test pour Admin
 app.get("/admin/items", checkAdmin, async (req, res) => {
   const { data, error } = await supabase.from("ITEM").select();
