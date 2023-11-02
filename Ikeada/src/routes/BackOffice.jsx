@@ -1,6 +1,6 @@
 import { Table } from "react-bootstrap";
 import { useEffect, useState } from "react";
-import BackOfficeItem from "./BackOfficeItem.jsx"
+import BackOfficeItem from "../components/BackOfficeItem"
 
 export default function BackOffice() {
     const [jsonData, setJsonData] = useState(null);
@@ -13,8 +13,6 @@ export default function BackOffice() {
             .then(data => setJsonData(data))
             .catch(error => console.error('Erreur de chargement du JSON :', error));
     }, []);
-
- 
 
     return (
         <>
@@ -33,7 +31,7 @@ export default function BackOffice() {
                     {jsonData &&
                         <>
 
-                            {jsonData.item.map((product) => (
+                            {jsonData.map((product) => (
                                 <BackOfficeItem name={product.name}
                                     status={product.status}
                                     available={product.available}

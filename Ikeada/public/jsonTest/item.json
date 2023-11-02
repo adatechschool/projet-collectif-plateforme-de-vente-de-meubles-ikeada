@@ -32,7 +32,7 @@
         "materials": ["bois", "cuir"],
         "available": true,
         "picture": "https://www.alinea.com/dw/image/v2/BCKM_PRD/on/demandware.static/-/Sites-ali_master/default/dwedccc954/images/27169100/CHAISE-ILIES-27169100-A-1.jpg?sw=982&sh=982&sm=fit&sfrm=png",
-        "status": true,
+        "status": false,
         "user_id": null
     },
     {

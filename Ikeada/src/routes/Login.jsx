@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 
@@ -12,7 +12,7 @@ const supabase = createClient(supabaseUrl, supabaseKey)
 export default function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-
+  const [data, setData] = useState({})
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
@@ -24,6 +24,8 @@ export default function Login() {
       if (error) {
         console.error('Erreur de connexion :', error.message);
       } else {
+        setData(data)
+        console.log(data)
         console.log('Utilisateur connecté :', data);
       }
     } catch (error) {
@@ -59,6 +61,6 @@ export default function Login() {
       <Button variant="primary" type="submit">
         Se connecter
       </Button>
-    </Form>
+    </Form >
   );
 }

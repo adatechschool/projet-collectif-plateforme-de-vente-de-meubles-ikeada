@@ -4,10 +4,6 @@ import TableStatus from "./TableStatus";
 
 
 export default function BackOfficeItem({ name, price, status, available }) {
-
-
-
-
     return (
         <>
             <tr className="fs-5">
