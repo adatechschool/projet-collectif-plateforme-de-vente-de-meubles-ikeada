@@ -2,6 +2,7 @@ import {createClient} from '@supabase/supabase-js';
 import express from 'express';
 import morgan from 'morgan';
 import bodyParser from 'body-parser';
+import jwt from 'jsonwebtoken';
 
 const app = express();
 app.use(morgan('combined'));
@@ -16,5 +17,46 @@ app.use((req,res,next) => {
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS');
     next();
 });
+
+app.use("/admin", (req, res, next) => {
+    const token = req.header('Authorization');
+  
+    if (!token) {
+      return res.status(401).json({ message: 'Accès non autorisé. Token manquant.' });
+    }
+  
+    try {
+      // Vérifiez le format du jeton et faites d'autres validations si nécessaire
+      const decoded = jwt.verify(token.replace('Bearer ', ''), getPublicKeyFromDatabase(), { algorithms: ['RS256'] });
+  
+      // Le jeton est valide, vous pouvez utiliser les informations dans l'objet `decoded` pour autoriser l'utilisateur
+      req.user = decoded; // Ajoutez les informations du jeton au req pour une utilisation ultérieure
+      next();
+    } catch (error) {
+      // Le jeton est invalide ou a expiré
+      return res.status(401).json({ message: 'Accès non autorisé. Jeton invalide ou expiré.' });
+    }
+  });
+
+  async function getPublicKeyFromDatabase() {
+    try {
+      // Récupérez la clé publique JWK depuis Supabase
+      const { data, error } = await supabase
+        .from('auth.v1.public_keys')
+        .select('public_key')
+        .eq('alg', 'RS256')
+        .single();
+  
+      if (error) {
+        console.error('Erreur lors de la récupération de la clé publique depuis Supabase:', error);
+        throw new Error('Erreur lors de la récupération de la clé publique depuis Supabase');
+      }
+  
+      return data.public_key;
+    } catch (error) {
+      console.error('Erreur lors de la récupération de la clé publique depuis Supabase:', error);
+      throw new Error('Erreur lors de la récupération de la clé publique depuis Supabase');
+    }
+  }
 
 export default app;
