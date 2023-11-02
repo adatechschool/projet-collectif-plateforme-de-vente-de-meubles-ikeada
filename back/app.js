@@ -94,17 +94,29 @@ app.use("/admin/*", checkAuth, checkAdmin, (req, res, next) => {
   next();
 });
 
-//route qui renvoie les données de la table ITEM
-app.get("/ITEM", async (req, res) => {
+//---> DEBUT ROOTING PUBLIC GET
+
+//affiche tous les meubles
+
+app.get("/items", async (req, res) => {
   const { data, error } = await supabase
     .from("ITEM")
     .select()
     .eq("status", true);
-  res.send(data);
+
+  if (error) {
+    res.status(500).json({ error: "Une erreur s'est produite" });
+  } else {
+    res.status(200).json(data);
+  }
 });
 
-// route qui renvoie la donnée ID de la table ITEM
-app.get("/ITEM/:id", async (req, res) => {
+//affiche les meubles selon le nom du produit
+
+app.get("/items/:name", async (req, res) => {
+  const itemName = req.params.name;
+  console.log("Requête avec name:", itemName); // Ajout de ce message de débogage
+
   const { data, error } = await supabase
     .from("ITEM")
     .select("id")
@@ -170,5 +182,33 @@ function checkAdmin(req, res, next) {
   }
 }
 
+    .select()
+    .eq("name", itemName);
+
+  if (error) {
+    console.error(error);
+    res.status(500).json({ error: "Une erreur s'est produite" });
+  } else {
+    res.status(200).json(data);
+  }
+});
+
+//affiche les meubles selon l'id du produit
+
+app.get("/items/id/:id", async (req, res) => {
+  const itemId = req.params.id;
+
+  const { data, error } = await supabase.from("ITEM").select().eq("id", itemId);
+
+  if (error) {
+    console.error(error);
+
+    res.status(500).json({ error: "Une erreur s'est produite" });
+  } else {
+    res.status(200).json(data);
+  }
+});
+
+//---> FIN ROOTING PUBLIC GET
 export default app;
 
