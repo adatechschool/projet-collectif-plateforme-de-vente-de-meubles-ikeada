@@ -95,14 +95,20 @@ app.use("/admin/*", checkAuth, checkAdmin, (req, res, next) => {
 });
 
 //route qui renvoie les données de la table ITEM
-app.get("/item", async (req, res) => {
-  const { data, error } = await supabase.from("ITEM").select();
+app.get("/ITEM", async (req, res) => {
+  const { data, error } = await supabase
+    .from("ITEM")
+    .select()
+    .eq("status", true);
   res.send(data);
 });
 
 // route qui renvoie la donnée ID de la table ITEM
 app.get("/ITEM/:id", async (req, res) => {
-  const { data, error } = await supabase.from("ITEM").select("id");
+  const { data, error } = await supabase
+    .from("ITEM")
+    .select("id")
+    .eq("status", true);
   res.send(data);
 });
 
