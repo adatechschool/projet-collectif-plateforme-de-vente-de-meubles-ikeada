@@ -3,7 +3,7 @@ import { Button } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 
 import { useState, useEffect } from 'react'
-import ProductPage from 'components/ProductPage.jsx'
+import ProductPage from './ProductPage.jsx'
 
 import { Stack } from 'react-bootstrap';
 
