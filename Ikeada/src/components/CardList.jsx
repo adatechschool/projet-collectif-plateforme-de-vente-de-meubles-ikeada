@@ -8,7 +8,6 @@ import ProductPage from './ProductPage.jsx'
 import { Stack } from 'react-bootstrap';
 
 
-
 export default function CardList() {
 
     const [jsonData, setJsonData] = useState(null);
