@@ -10,10 +10,18 @@ export default function App() {
   return (
     <div>
       <Routes>
+        {/* Route vers "l'interface", seule la navbar est chargée */}
         <Route path="/" element={<Layout />}>
+          {/* Routes vers le contenu */}
           <Route path="accueil" element={<CardList />}>
           </Route>
-          <Route path="product-page" element={<ProductPage />}>
+          {/* Route dynamique vers chaque page produit selon l'id */}
+          <Route
+            path="/:productId"
+            element={<ProductPage />}
+            loader={({ params }) => {
+            }}
+            action={({ params }) => { }}>
           </Route>
           <Route path="back-office" element={<BackOffice />}>
           </Route>
