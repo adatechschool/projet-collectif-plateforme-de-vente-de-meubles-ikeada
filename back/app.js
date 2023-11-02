@@ -95,7 +95,7 @@ app.use("/admin/*", checkAuth, checkAdmin, (req, res, next) => {
 });
 
 //route qui renvoie les données de la table ITEM
-app.get("/ITEM", async (req, res) => {
+app.get("/item", async (req, res) => {
   const { data, error } = await supabase.from("ITEM").select();
   res.send(data);
 });
