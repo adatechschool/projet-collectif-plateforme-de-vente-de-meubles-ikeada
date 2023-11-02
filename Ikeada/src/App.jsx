@@ -1,30 +1,34 @@
-import { useState, useEffect } from 'react'
-import NavBar from './NavBar'
-import './App.css'
-
-import ProductPage from './components/ProductPage'
-import { Stack } from 'react-bootstrap';
-
-
-function ItemCards() {
-  const [jsonData, setJsonData] = useState(null);
-
-  useEffect(() => {
-    fetch('./jsonTest/item.json')
-      .then(response => response.json())
-      .then(data => setJsonData(data.item[0]))
-      .catch(error => console.error('Erreur de chargement du JSON :', error));
-  }, []);
-
-  console.log(jsonData)
-
+import Layout from './routes/Layout'
+import CardList from './routes/CardList'
+import ProductPage from './routes/ProductPage.jsx'
+import BackOffice from './routes/BackOffice.jsx'
+import Login from './routes/Login'
+import { Routes, Route } from "react-router-dom";
+import {  } from './auth/ProtectedRoute'
+export default function App() {
   return (
-    <>
-      {jsonData && 
-        <ProductPage data={jsonData} />
-      }
-    </>
-  )  
-}
+    <div>
+      <Routes>
+        {/* Route vers "l'interface", seule la navbar est chargée */}
+        <Route path="/" element={<Layout />}>
+          {/* Routes vers le contenu */}
+          <Route path="accueil" element={<CardList />}>
+          </Route>
+          {/* Route dynamique vers chaque page produit selon l'id */}
+          <Route
+            path=":productId"
+            element={<ProductPage />}
+          >
+          </Route>
 
-export default ItemCards
+          <Route path="back-office" element={
+            <BackOffice />
+          }>
+          </Route>
+          <Route path="login" element={<Login />}>
+          </Route>
+        </Route>
+      </Routes>
+    </div>
+  )
+}
