@@ -1,69 +1,74 @@
-{
-    "item": [
-        {
-            "id": 1,
-            "name": "Table basse",
-            "desc": "Une élégante table basse en chêne. Parfaite pour votre salon.",
-            "subcateg_id": 1,
-            "price": 13000,
-            "materials": ["bois", "verre"],
-            "colors": ["chêne", "noir"],
-            "available": true,
-            "picture": "https://i.pinimg.com/originals/88/2b/79/882b792fd824530f5348d43c81edc03a.jpg",
-            "status": true,
-            "user_id": 1
-        },
-        {
-            "id": 2,
-            "name": "Chaise en bois",
-            "desc": "Une chaise en bois de noyer. Confortable et élégante.",
-            "subcateg_id": 2,
-            "price": 8000,
-            "materials": ["bois", "cuir"],
-            "colors": ["noyer", "blanc"],
-            "available": true,
-            "picture": "https://www.alinea.com/dw/image/v2/BCKM_PRD/on/demandware.static/-/Sites-ali_master/default/dwedccc954/images/27169100/CHAISE-ILIES-27169100-A-1.jpg?sw=982&sh=982&sm=fit&sfrm=png",
-            "status": true,
-            "user_id": 1
-        },
-        {
-            "id": 3,
-            "name": "Armoire en chêne",
-            "desc": "Une spacieuse armoire en chêne massif. Parfaite pour votre chambre.",
-            "subcateg_id": 3,
-            "price": 18000,
-            "materials": ["bois", "acier"],
-            "colors": ["chêne", "acier inoxydable"],
-            "available": true,
-            "picture": "https://meubles-chene.fr/hd/1547-PMC492-BOIS-PASSIONS100253.jpg",
-            "status": true,
-            "user_id": 1
-        },
-        {
-            "id": 4,
-            "name": "Canapé en cuir",
-            "desc": "Un canapé en cuir marron. Luxueux et confortable.",
-            "subcateg_id": 4,
-            "price": 25000,
-            "materials": ["cuir", "acier"],
-            "colors": ["marron", "argent"],
-            "available": true,
-            "picture": "https://media.roche-bobois.com/is/image/rochebobois/SWEET_amb_2020-02_caramel_PP?wid=1250&fmt=pjpeg&resMode=sharp2&qlt=80",
-            "status": true,
-            "user_id": 1
-        },
-        {
-            "id": 5,
-            "name": "Lit à baldaquin",
-            "desc": "Un lit à baldaquin en bois d'érable. Majestueux et romantique.",
-            "subcateg_id": 5,
-            "price": 22000,
-            "materials": ["bois", "velours"],
-            "colors": ["érable", "rouge"],
-            "available": true,
-            "picture": "https://img.over-blog-kiwi.com/1/45/37/60/20180324/ob_4d20fa_lit-baldaquin-a-part-ca-1.jpg",
-            "status": true,
-            "user_id": 1
-        }
-    ]
-}    
+[
+    {
+        "id": "26e038cf-c5e4-42e9-979b-7a6f2711d4d9",
+        "name": "Éclat de café",
+        "desc": "Une élégante table basse en chêne. Parfaite pour votre salon.",
+        "subcateg_id": "2d12be4f-5492-444b-ac80-5f05d32f46e4",
+        "price": 13000,
+        "materials": ["bois", "verre"],
+        "available": true,
+        "picture": "https://i.pinimg.com/originals/88/2b/79/882b792fd824530f5348d43c81edc03a.jpg",
+        "status": true,
+        "user_id": null
+    },
+    {
+        "id": "97ab6e60-7a30-4acb-93c0-caabe2041cce",
+        "name": "Malauquhu",
+        "desc": "Jolie chaise en marbre",
+        "subcateg_id": "5ed1540e-df70-4ad4-8dfb-700550d4bb9a",
+        "price": 120000,
+        "materials": ["bois", "marbre"],
+        "available": true,
+        "picture": null,
+        "status": true,
+        "user_id": null
+    },
+    {
+        "id": "b5d7adcd-888e-45db-b2b4-a5984526d511",
+        "name": "Noyer Luxueux",
+        "desc": "Une chaise en bois de noyer. Confortable et élégante.",
+        "subcateg_id": "5ed1540e-df70-4ad4-8dfb-700550d4bb9a",
+        "price": 8000,
+        "materials": ["bois", "cuir"],
+        "available": true,
+        "picture": "https://www.alinea.com/dw/image/v2/BCKM_PRD/on/demandware.static/-/Sites-ali_master/default/dwedccc954/images/27169100/CHAISE-ILIES-27169100-A-1.jpg?sw=982&sh=982&sm=fit&sfrm=png",
+        "status": true,
+        "user_id": null
+    },
+    {
+        "id": "d0b19424-37a2-4bb2-b7ca-84510b17485d",
+        "name": "Chêne Royal",
+        "desc": "Une spacieuse armoire en chêne massif. Parfaite pour votre chambre.",
+        "subcateg_id": "8f4429bf-d011-4e9c-90a8-3955aee9d4ec",
+        "price": 18000,
+        "materials": ["bois", "acier"],
+        "available": false,
+        "picture": "https://meubles-chene.fr/hd/1547-PMC492-BOIS-PASSIONS100253.jpg",
+        "status": true,
+        "user_id": null
+    },
+    {
+        "id": "16437bf3-51d9-46ac-b8cc-852c4ee0c9d3",
+        "name": "LuxeVelvet",
+        "desc": "Un canapé en cuir marron. Luxueux et confortable.",
+        "subcateg_id": "777e7683-3300-41e4-ba8d-6bc9dbc143c1",
+        "price": 25000,
+        "materials": ["cuir", "acier"],
+        "available": true,
+        "picture": "https://media.roche-bobois.com/is/image/rochebobois/SWEET_amb_2020-02_caramel_PP?wid=1250&fmt=pjpeg&resMode=sharp2&qlt=80",
+        "status": true,
+        "user_id": null
+    },
+    {
+        "id": "602b16ce-a952-465e-b717-9ee195161485",
+        "name": "PalaisDoré",
+        "desc": "Un lit à baldaquin en bois d'érable. Majestueux et romantique.",
+        "subcateg_id": "f7cdc04e-c477-44ff-bfd4-d3de8102a09f",
+        "price": 22000,
+        "materials": ["bois", "velours"],
+        "available": true,
+        "picture": "https://img.over-blog-kiwi.com/1/45/37/60/20180324/ob_4d20fa_lit-baldaquin-a-part-ca-1.jpg",
+        "status": true,
+        "user_id": null
+    }
+]

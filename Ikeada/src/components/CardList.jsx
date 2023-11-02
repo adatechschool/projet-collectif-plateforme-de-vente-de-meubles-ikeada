@@ -24,13 +24,9 @@ export default function CardList() {
 
     return (
         <>
-            {jsonData &&
-                <>
-                    <Stack direction="vertical" gap={3}>
-                        {jsonData.item.map((product) => (
-                            <ProductPage data={product} />
-                        ))}
-                    </Stack></>}
+          {jsonData && 
+            <ProductPage data={jsonData} />
+          }
         </>
-    )
+      )  
 }

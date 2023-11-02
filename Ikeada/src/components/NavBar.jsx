@@ -1,11 +1,11 @@
 import { Container, Navbar, Nav, Form } from 'react-bootstrap'
 import { Link } from "react-router-dom";
 
-import { HouseDoorFill, PersonFill } from 'react-bootstrap-icons';
+import { HouseDoorFill, PersonFill, GearFill } from 'react-bootstrap-icons';
 
 export function NavBar() {
   return (
-    <Navbar expand="lg" className="bg-body-tertiary">
+    <Navbar fixed="top" sticky="top" expand="lg" className="bg-body-tertiary">
       <Container fluid>
         <Navbar.Brand href="#">Ikeada</Navbar.Brand>
         <Nav
@@ -22,9 +22,10 @@ export function NavBar() {
           />
           {/* <Button variant="outline-success">Search</Button> /// A remettre selon le besoin */}
         </Form>
-        <Nav>
-          <Link to={`/accueil`}><HouseDoorFill size={25} /></Link>
-          <Link to={`/back-office`}><PersonFill size={25} /></Link>
+        <Nav className="grid gap-3">
+          <Link to={`/accueil`}><HouseDoorFill size={30} /></Link>
+          <Link to={`/login`}><PersonFill size={30} /></Link>
+          <Link to={`/back-office`}><GearFill size={30} /></Link>
         </Nav>
       </Container>
     </Navbar>

@@ -2,6 +2,7 @@ import Layout from '../Layout'
 import CardList from './CardList'
 import ProductPage from './ProductPage.jsx'
 import BackOffice from './BackOffice.jsx'
+import Login from './Login'
 import { Routes, Route } from "react-router-dom";
 
 
@@ -15,6 +16,8 @@ export default function App() {
           <Route path="product-page" element={<ProductPage />}>
           </Route>
           <Route path="back-office" element={<BackOffice />}>
+          </Route>
+          <Route path="login" element={<Login />}>
           </Route>
         </Route>
       </Routes>
