@@ -36,6 +36,11 @@ app.use((req, res, next) => {
   next();
 });
 
+// Check le jeton JWT de toutes les requètes du BO avant de les traiter
+app.use("/admin/*", checkAuth, checkAdmin, (req, res, next) => {
+  next();A ch
+});
+
 //---> DEBUT ROOTING PUBLIC GET
 
 //affiche tous les meubles
@@ -62,7 +67,10 @@ app.get("/items/:name", async (req, res) => {
   const { data, error } = await supabase
     .from("ITEM")
     .select()
+    .eq("status", true)
     .eq("name", itemName);
+
+  res.send(data);
 
   if (error) {
     console.error(error);
@@ -87,41 +95,13 @@ app.get("/items/id/:id", async (req, res) => {
     res.status(200).json(data);
   }
 });
-
 //---> FIN ROOTING PUBLIC GET
+
+
+
 // Check le jeton JWT de toutes les requètes du BO avant de les traiter
 app.use("/admin/*", checkAuth, checkAdmin, (req, res, next) => {
   next();
-});
-
-//---> DEBUT ROOTING PUBLIC GET
-
-//affiche tous les meubles
-
-app.get("/items", async (req, res) => {
-  const { data, error } = await supabase
-    .from("ITEM")
-    .select()
-    .eq("status", true);
-
-  if (error) {
-    res.status(500).json({ error: "Une erreur s'est produite" });
-  } else {
-    res.status(200).json(data);
-  }
-});
-
-//affiche les meubles selon le nom du produit
-
-app.get("/items/:name", async (req, res) => {
-  const itemName = req.params.name;
-  console.log("Requête avec name:", itemName); // Ajout de ce message de débogage
-
-  const { data, error } = await supabase
-    .from("ITEM")
-    .select("id")
-    .eq("status", true);
-  res.send(data);
 });
 
 // Routing de test pour Admin
@@ -182,33 +162,5 @@ function checkAdmin(req, res, next) {
   }
 }
 
-    .select()
-    .eq("name", itemName);
-
-  if (error) {
-    console.error(error);
-    res.status(500).json({ error: "Une erreur s'est produite" });
-  } else {
-    res.status(200).json(data);
-  }
-});
-
-//affiche les meubles selon l'id du produit
-
-app.get("/items/id/:id", async (req, res) => {
-  const itemId = req.params.id;
-
-  const { data, error } = await supabase.from("ITEM").select().eq("id", itemId);
-
-  if (error) {
-    console.error(error);
-
-    res.status(500).json({ error: "Une erreur s'est produite" });
-  } else {
-    res.status(200).json(data);
-  }
-});
-
-//---> FIN ROOTING PUBLIC GET
 export default app;
 
