@@ -73,10 +73,7 @@ function checkAuth(req, res, next) {
     const token = req.headers.authorization.split(" ")[1];
     try {
       // Verifie le token avec la clef secrète
-      const decoded = jwt.verify(
-        token,
-        "YTzJl/+pHrxr6BZkR+KA12wyrqhVvgl8lmuBX58oXZNKRc4JrmDOX1TrdgJB0jGazXmmzi7s0A/rqpg9TOQJ9g=="
-      );
+      const decoded = jwt.verify(token, process.env.SUPABASE_TOKEN);
       req.userData = decoded;
       // S'il est possible de le decoder alors on passe au prochains middleware
       next();

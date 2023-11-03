@@ -32,6 +32,7 @@ export default function TableActions({ status, available }) {
   }
 }
 
+// vérification du type des props
 TableActions.propTypes = {
   status: PropTypes.bool,
   available: PropTypes.bool,

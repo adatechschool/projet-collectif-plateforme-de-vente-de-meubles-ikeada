@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import {
   Container,
   Row,
@@ -8,18 +8,24 @@ import {
   Button,
   Stack,
   Badge,
+  Modal,
 } from "react-bootstrap";
 
+
 export default function ProductPage({ data }) {
-  const [currentProduct, setCurrentProduct] = useState(2);
+  const [currentProduct, setCurrentProduct] = useState(0);
   const dataProduct = data[currentProduct];
+
+  const [zoomImg, setZoomImg] = useState(false);
+  const handleClose = () => setZoomImg(false);
+  const handleShow = () => setZoomImg(true);
 
   const picSrc =
     dataProduct.picture ||
     "https://www.arqueselectrodiesel.fr/wp-content/uploads/2022/08/photo-non-disponible-1.jpg";
 
   return (
-    <Container
+    <><Container
       className="d-flex flex-column justify-content-center align-items-center"
       style={{ minHeight: "90vh", width: "90vw" }}
       fluid
@@ -29,9 +35,9 @@ export default function ProductPage({ data }) {
           <Image
             src={picSrc}
             fluid
-            style={{ width: "400px", marginBottom: "10px" }}
+            style={{ width: "400px", marginBottom: "20px" }}
             thumbnail
-          />
+            onClick={handleShow} />
         </Col>
       </Row>
       <Row>
@@ -46,21 +52,21 @@ export default function ProductPage({ data }) {
                 gap={2}
                 className="d-flex flex-row justify-content-center"
               >
-                {dataProduct.materials.map((material) => (
-                  <Badge pill bg="secondary">
+                {dataProduct.materials.map((material, index) => (
+                  <Badge pill bg="secondary" key={index}>
                     {material}
                   </Badge>
                 ))}
               </Stack>
             </ListGroup.Item>
             {/* <ListGroup.Item className='d-flex flex-column justify-content-center align-items-center'>
-          Couleurs :
-          <Stack direction="horizontal" gap={2} className="d-flex flex-row justify-content-center">
-            {dataProduct.colors.map((color) => (
-              <Badge pill bg="secondary">{color}</Badge>
-            ))}
-          </Stack>
-        </ListGroup.Item> */}
+  Couleurs :
+  <Stack direction="horizontal" gap={2} className="d-flex flex-row justify-content-center">
+    {dataProduct.colors.map((color) => (
+      <Badge pill bg="secondary">{color}</Badge>
+    ))}
+  </Stack>
+</ListGroup.Item> */}
           </ListGroup>
         </Col>
         <Col className="d-flex flex-column align-items-center justify-content-center" style={{ width: "25vw" }}>
@@ -71,5 +77,19 @@ export default function ProductPage({ data }) {
         </Col>
       </Row>
     </Container>
+    
+    <Modal show={zoomImg} onHide={handleClose} animation={false} size="lg">
+        <Modal.Body>
+        <Image
+            src={picSrc}
+            fluid
+            />
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}>
+            Close
+          </Button>
+        </Modal.Footer>
+      </Modal></>
   );
 }

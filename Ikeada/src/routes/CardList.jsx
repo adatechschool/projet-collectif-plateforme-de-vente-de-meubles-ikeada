@@ -1,12 +1,6 @@
-import { Card } from 'react-bootstrap'
-import { Button } from 'react-bootstrap'
-import { Link } from 'react-router-dom'
-
 import { useState, useEffect } from 'react'
 import ProductPage from './ProductPage.jsx'
-
-import { Stack } from 'react-bootstrap';
-
+import ProductCard from './ProductCard.jsx'
 
 export default function CardList() {
 
@@ -18,14 +12,14 @@ export default function CardList() {
             .then(data => setJsonData(data))
             .catch(error => console.error('Erreur de chargement du JSON :', error));
     }, []);
-
-    console.log(jsonData)
-
+    
     return (
-        <>
+        <div className="d-flex justify-content-around flex-wrap">
           {jsonData && 
-            <ProductPage data={jsonData} />
+            jsonData.map((product) => 
+            <ProductCard key={product.id} data={product} />
+            )
           }
-        </>
+        </div>
       )  
 }

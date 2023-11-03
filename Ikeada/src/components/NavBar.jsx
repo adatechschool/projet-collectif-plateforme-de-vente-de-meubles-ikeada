@@ -1,6 +1,5 @@
 import { Container, Navbar, Nav, Form } from 'react-bootstrap'
 import { Link } from "react-router-dom";
-
 import { HouseDoorFill, PersonFill, GearFill } from 'react-bootstrap-icons';
 
 export function NavBar() {
@@ -23,9 +22,9 @@ export function NavBar() {
           {/* <Button variant="outline-success">Search</Button> /// A remettre selon le besoin */}
         </Form>
         <Nav className="grid gap-3">
-          <Link to={`/accueil`}><HouseDoorFill size={30} /></Link>
-          <Link to={`/login`}><PersonFill size={30} /></Link>
-          <Link to={`/back-office`}><GearFill size={30} /></Link>
+          <Link to={`/accueil`}><HouseDoorFill size={30} className="icon" /></Link>
+          <Link to={`/login`}><PersonFill size={30} className="icon" /></Link>
+          <Link to={`/back-office`}><GearFill size={30} className="icon" /></Link>
         </Nav>
       </Container>
     </Navbar>

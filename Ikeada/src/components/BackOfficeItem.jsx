@@ -15,6 +15,7 @@ export default function BackOfficeItem({ name, price, status, available }) {
   );
 }
 
+// vérification du type des props
 BackOfficeItem.propTypes = {
   name: PropTypes.string,
   price: PropTypes.number,

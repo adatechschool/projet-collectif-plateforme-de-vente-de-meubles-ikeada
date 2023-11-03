@@ -5,7 +5,6 @@ export default function EditButton() {
         console.log("delete")
         // trigger POST request
     }
-
     return (
         <>
             <Button variant="transparent" onClick={deleteItem}>

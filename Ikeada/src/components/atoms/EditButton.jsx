@@ -5,7 +5,6 @@ export default function EditButton() {
         console.log("edit")
         // trigger UPDATE request
     }
-
     return (
         <>
             <Button variant="transparent"  onClick={editItem}>

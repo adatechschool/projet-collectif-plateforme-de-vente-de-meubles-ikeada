@@ -3,10 +3,9 @@ import { useEffect, useState } from "react";
 import BackOfficeItem from "../components/BackOfficeItem"
 
 export default function BackOffice() {
+    // on crée le state avec rien dedans au départ
     const [jsonData, setJsonData] = useState(null);
-
-
-
+    // on récupère les données et met à jour le state
     useEffect(() => {
         fetch('../../public/jsonTest/item.json')
             .then(response => response.json())
@@ -28,9 +27,9 @@ export default function BackOffice() {
                     </tr>
                 </thead>
                 <tbody>
+                    {/* on génère autant d'items qu'il y a de meubles dans les données */}
                     {jsonData &&
                         <>
-
                             {jsonData.map((product) => (
                                 <BackOfficeItem name={product.name}
                                     status={product.status}

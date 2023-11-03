@@ -1,0 +1,12 @@
+.button {
+    background-color: tomato;
+    border: none;
+}
+
+.button:hover, .button:active {
+    background-color: #cf391f;
+}
+
+.icon {
+    color: tomato;
+}
