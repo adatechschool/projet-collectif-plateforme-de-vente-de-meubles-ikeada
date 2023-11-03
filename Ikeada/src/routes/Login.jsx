@@ -1,18 +1,18 @@
-import { useState } from 'react';
-import Button from 'react-bootstrap/Button';
-import Form from 'react-bootstrap/Form';
+import React, { useState } from "react";
+import Button from "react-bootstrap/Button";
+import Form from "react-bootstrap/Form";
 
+import { createClient } from "@supabase/supabase-js";
 
-import { createClient } from '@supabase/supabase-js'
-
-const supabaseUrl = 'https://bbrfovbvfzeszrjnhsdp.supabase.co'
-const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJicmZvdmJ2Znplc3pyam5oc2RwIiwicm9sZSI6ImFub24iLCJpYXQiOjE2OTg2NjQwMDAsImV4cCI6MjAxNDI0MDAwMH0.m59kFNiMCInEjaQcC-v32YOJ4JolEwE9dJruivGi5FQ'
-const supabase = createClient(supabaseUrl, supabaseKey)
+const supabaseUrl = "https://bbrfovbvfzeszrjnhsdp.supabase.co";
+const supabaseKey =
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJicmZvdmJ2Znplc3pyam5oc2RwIiwicm9sZSI6ImFub24iLCJpYXQiOjE2OTg2NjQwMDAsImV4cCI6MjAxNDI0MDAwMH0.m59kFNiMCInEjaQcC-v32YOJ4JolEwE9dJruivGi5FQ";
+const supabase = createClient(supabaseUrl, supabaseKey);
 
 export default function Login() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [data, setData] = useState({})
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
@@ -22,14 +22,12 @@ export default function Login() {
       });
 
       if (error) {
-        console.error('Erreur de connexion :', error.message);
+        console.error("Erreur de connexion :", error.message);
       } else {
-        setData(data)
-        console.log(data)
-        console.log('Utilisateur connecté :', data);
+        console.log("Utilisateur connecté :", data);
       }
     } catch (error) {
-      console.error('Erreur de connexion :', error.message);
+      console.error("Erreur de connexion :", error.message);
     }
   };
 
@@ -61,6 +59,6 @@ export default function Login() {
       <Button variant="primary" type="submit">
         Se connecter
       </Button>
-    </Form >
+    </Form>
   );
 }
