@@ -24,6 +24,8 @@ export default function Login() {
       if (error) {
         console.error("Erreur de connexion :", error.message);
       } else {
+        await supabase.auth.setSession(data.session);
+        console.log("Data Session : ", data.session);
         console.log("Utilisateur connecté :", data);
       }
     } catch (error) {
