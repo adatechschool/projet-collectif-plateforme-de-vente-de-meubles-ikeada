@@ -80,44 +80,52 @@ app.get("/items/id/:id", async (req, res) => {
 });
 
 //---> FIN ROOTING PUBLIC GET
-app.use("/admin", (req, res, next) => {
-    const token = req.header('Authorization');
-  
-    if (!token) {
-      return res.status(401).json({ message: 'Accès non autorisé. Token manquant.' });
-    }
-  
+// Check toutes les requètes du BO avant de les traiter
+    app.use('/admin/*', checkAuth, (req, res, next) => {
+        next();
+      });
+
+  app.get("/admin/items", async (req, res) => {
+    const {data, error} = await supabase.from('ITEM').select()
+    if (error) {
+        res.send(error);
+    };
+    res.send(data);
+  })
+
+  app.get("/admin/color", async (req, res) => {
+
+    const {data:testData, error:testError} = await supabase.rpc('test_authorization_header')
+    console.log(`The user role is ${testData.role} and the user UUID is ${testData.sub}. `,testError)
+
     try {
-      // Vérifiez le format du jeton et faites d'autres validations si nécessaire
-      const decoded = jwt.verify(token.replace('Bearer ', ''), getPublicKeyFromDatabase(), { algorithms: ['RS256'] });
-  
-      // Le jeton est valide, vous pouvez utiliser les informations dans l'objet `decoded` pour autoriser l'utilisateur
-      req.user = decoded; // Ajoutez les informations du jeton au req pour une utilisation ultérieure
-      next();
+      const { data, error } = await supabase.from('COLOR').select();
+      if (error) {
+        throw error;
+      }
+      res.status(200).json(data);
     } catch (error) {
-      // Le jeton est invalide ou a expiré
-      return res.status(401).json({ message: 'Accès non autorisé. Jeton invalide ou expiré.' });
+      console.error('Error fetching colors:', error);
+      res.status(500).json({ error: 'Internal Server Error' });
     }
   });
 
-  async function getPublicKeyFromDatabase() {
+
+  // func pour checker le token des requetes sur le BO
+  function checkAuth(req, res, next) {
+    // Recupère l' access token du header de la requète
+    const token = req.headers.authorization.split(' ')[1]
+
     try {
-      // Récupérez la clé publique JWK depuis Supabase
-      const { data, error } = await supabase
-        .from('auth.v1.public_keys')
-        .select('public_key')
-        .eq('alg', 'RS256')
-        .single();
-  
-      if (error) {
-        console.error('Erreur lors de la récupération de la clé publique depuis Supabase:', error);
-        throw new Error('Erreur lors de la récupération de la clé publique depuis Supabase');
-      }
-  
-      return data.public_key;
-    } catch (error) {
-      console.error('Erreur lors de la récupération de la clé publique depuis Supabase:', error);
-      throw new Error('Erreur lors de la récupération de la clé publique depuis Supabase');
+      // Verifie le token avec la clef secrète
+      const decoded = jwt.verify(token, 'YTzJl/+pHrxr6BZkR+KA12wyrqhVvgl8lmuBX58oXZNKRc4JrmDOX1TrdgJB0jGazXmmzi7s0A/rqpg9TOQJ9g==')
+      req.userData = decoded
+      console.log(decoded)
+      next()
+    } catch (err) {
+      return res.status(401).json({
+        message: 'Auth failed'
+      })
     }
   }
 
