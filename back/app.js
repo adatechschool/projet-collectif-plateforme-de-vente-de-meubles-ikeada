@@ -38,7 +38,7 @@ app.use((req, res, next) => {
 
 // Check le jeton JWT de toutes les requètes du BO avant de les traiter
 app.use("/admin/*", checkAuth, checkAdmin, (req, res, next) => {
-  next();A ch
+  next(); 
 });
 
 //---> DEBUT ROOTING PUBLIC GET
