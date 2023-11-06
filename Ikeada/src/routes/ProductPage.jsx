@@ -16,28 +16,31 @@ import { observer } from "mobx-react-lite";
 
 const ProductPage = observer(() => {
   // on récupère l'id depuis l'URL créée par le routeur
-  const itemId = useParams().productId
+  const itemId = useParams().productId;
   // et l'item depuis le store
-  const item = itemsStore.currentItem
+  const item = itemsStore.currentItem;
   // on vérifie juste si la page à changée (ça évite de boucler)
   useEffect(() => {
     if (itemId) {
-      itemsStore.searchItemById(itemId)
+      itemsStore.searchItemById(itemId);
     }
-  }, [itemId])
+  }, [itemId]);
 
   // obligé d'utiliser useEffect pour ne pas appeler map avant que .materials n'existe et causer une erreur
-  const [materials, setMaterials] = useState([])
+  const [materials, setMaterials] = useState([]);
   useEffect(() => {
     if (item.materials) {
-      setMaterials(item.materials.map((material) => {
-        return (<Badge pill bg="secondary" key={material}>
-          {material}
-        </Badge>)
-      }))
+      setMaterials(
+        item.materials.map((material) => {
+          return (
+            <Badge pill bg="secondary" key={material}>
+              {material}
+            </Badge>
+          );
+        })
+      );
     }
-  }, [item.materials])
-
+  }, [item.materials]);
 
   const [zoomImg, setZoomImg] = useState(false);
   const handleClose = () => setZoomImg(false);
@@ -46,7 +49,7 @@ const ProductPage = observer(() => {
   // si on a pas d'image, on met le placeholder
   const picSrc =
     item.picture ||
-    "https://www.arqueselectrodiesel.fr/wp-content/uploads/2022/08/photo-non-disponible-1.jpg"
+    "https://www.arqueselectrodiesel.fr/wp-content/uploads/2022/08/photo-non-disponible-1.jpg";
   return (
     <>
       <Container
@@ -61,13 +64,17 @@ const ProductPage = observer(() => {
               fluid
               style={{ width: "400px", marginBottom: "20px" }}
               thumbnail
-              onClick={handleShow} />
+              onClick={handleShow}
+            />
           </Col>
         </Row>
         <Row>
           <Col style={{ width: "25vw" }}>
             <h4>{item.name}</h4>
             <p>{item.desc}</p>
+
+            {/* Afficher les matériaux du produit */}
+
             <ListGroup>
               <ListGroup.Item className="d-flex flex-column justify-content-center align-items-center">
                 Matériaux :
@@ -79,6 +86,40 @@ const ProductPage = observer(() => {
                   {materials}
                 </Stack>
               </ListGroup.Item>
+
+              {/* Afficher la disponibilité du produit */}
+
+              <ListGroup.Item className="d-flex flex-column justify-content-center align-items-center">
+                Disponibilité :
+                {item.available ? (
+                  <Badge pill bg="success">
+                    En stock
+                  </Badge>
+                ) : (
+                  <Badge pill bg="danger">
+                    Épuisé
+                  </Badge>
+                )}
+              </ListGroup.Item>
+
+              {/* Afficher la dimension du produit conversion mm vers cm */}
+
+              <ListGroup.Item className="d-flex flex-column justify-content-center align-items-center">
+                Dimensions :
+                {item.dimensions ? (
+                  <span>
+                    {item.dimensions[0] * 0.1}cm x {item.dimensions[1] * 0.1}cm{" "}
+                    x {item.dimensions[2] * 0.1}cm
+                  </span>
+                ) : (
+                  <Badge pill bg="danger">
+                    Non spécifié
+                  </Badge>
+                )}
+              </ListGroup.Item>
+
+              {/* Afficher la couleur du produit */}
+
               {/* <ListGroup.Item className='d-flex flex-column justify-content-center align-items-center'>
   Couleurs :
   <Stack direction="horizontal" gap={2} className="d-flex flex-row justify-content-center">
@@ -89,7 +130,10 @@ const ProductPage = observer(() => {
 </ListGroup.Item> */}
             </ListGroup>
           </Col>
-          <Col className="d-flex flex-column align-items-center justify-content-center" style={{ width: "25vw" }}>
+          <Col
+            className="d-flex flex-column align-items-center justify-content-center"
+            style={{ width: "25vw" }}
+          >
             <h1>{item.price / 100}€</h1>
             <Button variant="primary" size="lg">
               Acheter
@@ -100,10 +144,7 @@ const ProductPage = observer(() => {
 
       <Modal show={zoomImg} onHide={handleClose} animation={false} size="lg">
         <Modal.Body>
-          <Image
-            src={picSrc}
-            fluid
-          />
+          <Image src={picSrc} fluid />
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
@@ -113,6 +154,6 @@ const ProductPage = observer(() => {
       </Modal>
     </>
   );
-})
+});
 
-export default ProductPage
+export default ProductPage;
