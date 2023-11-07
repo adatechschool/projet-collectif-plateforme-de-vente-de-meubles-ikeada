@@ -30,7 +30,10 @@ class InterfaceBackEnd {
                 console.log(data)
                 return data
             })
-            .catch(error => console.error('Erreur de chargement du JSON :', error));
+            .catch(error => {
+                console.error('Erreur de chargement du JSON :', error);
+                return null;
+    });
     }
 
     // recherche par id

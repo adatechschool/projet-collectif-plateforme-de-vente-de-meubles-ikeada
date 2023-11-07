@@ -4,7 +4,8 @@ import ProductPage from './routes/ProductPage.jsx'
 import BackOffice from './routes/BackOffice.jsx'
 import Login from './routes/Login'
 import ProtectedRoute from './auth/ProtectedRoute'
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom"
+import ErrorPage from '/Users/margothuet/Documents/Ada/Projetco/projet-collectif-plateforme-de-vente-de-meubles-ikeada/Ikeada/src/routes/page404.jsx'
 
 export default function App() {
   return (
@@ -26,6 +27,8 @@ export default function App() {
         />
         {/* route vers la page de login */}
         <Route path="login" element={<Login />} />
+        {/* Route qui renvoie vers une page d'erreur (pas fini) */}
+        <Route path="/ErrorPage" element={<ErrorPage />} />
       </Route>
     </Routes>
   )
