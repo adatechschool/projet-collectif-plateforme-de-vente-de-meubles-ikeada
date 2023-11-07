@@ -13,7 +13,6 @@ import {
   Modal,
 } from "react-bootstrap";
 import { observer } from "mobx-react-lite";
-
 const ProductPage = observer(() => {
   // on récupère l'id depuis l'URL créée par le routeur
   const itemId = useParams().productId;
@@ -25,7 +24,6 @@ const ProductPage = observer(() => {
       itemsStore.searchItemById(itemId);
     }
   }, [itemId]);
-
   // obligé d'utiliser useEffect pour ne pas appeler map avant que .materials n'existe et causer une erreur
   const [materials, setMaterials] = useState([]);
   useEffect(() => {
@@ -41,11 +39,23 @@ const ProductPage = observer(() => {
       );
     }
   }, [item.materials]);
-
+  const [dimensions, setDimensions] = useState([]);
+  useEffect(() => {
+    if (item.dimensions) {
+      setDimensions(
+        item.dimensions.map((dimension) => {
+          return (
+            <Badge pill bg="secondary" key={dimension}>
+              {dimension}
+            </Badge>
+          );
+        })
+      );
+    }
+  }, [item.dimensions]);
   const [zoomImg, setZoomImg] = useState(false);
   const handleClose = () => setZoomImg(false);
   const handleShow = () => setZoomImg(true);
-
   // si on a pas d'image, on met le placeholder
   const picSrc =
     item.picture ||
@@ -104,22 +114,25 @@ const ProductPage = observer(() => {
 
               {/* Afficher la dimension du produit conversion mm vers cm */}
 
+              {/* Afficher la dimension du produit conversion mm vers cm */}
+              {/* Afficher la dimension du produit conversion mm vers cm */}
               <ListGroup.Item className="d-flex flex-column justify-content-center align-items-center">
                 Dimensions :
-                {item.dimensions ? (
-                  <span>
-                    {item.dimensions[0] * 0.1}cm x {item.dimensions[1] * 0.1}cm{" "}
-                    x {item.dimensions[2] * 0.1}cm
-                  </span>
-                ) : (
-                  <Badge pill bg="danger">
-                    Non spécifié
-                  </Badge>
-                )}
+                <Stack
+                  direction="horizontal"
+                  gap={2}
+                  className="d-flex flex-row justify-content-center"
+                >
+                  {item.dimensions
+                    ? item.dimensions.map((dimension, index) => (
+                        <Badge pill bg="secondary" key={index}>
+                          {`${dimension} cm`}
+                        </Badge>
+                      ))
+                    : "Aucune dimension disponible"}
+                </Stack>
               </ListGroup.Item>
-
               {/* Afficher la couleur du produit */}
-
               {/* <ListGroup.Item className='d-flex flex-column justify-content-center align-items-center'>
   Couleurs :
   <Stack direction="horizontal" gap={2} className="d-flex flex-row justify-content-center">
@@ -141,7 +154,7 @@ const ProductPage = observer(() => {
           </Col>
         </Row>
       </Container>
-
+      ​
       <Modal show={zoomImg} onHide={handleClose} animation={false} size="lg">
         <Modal.Body>
           <Image src={picSrc} fluid />
