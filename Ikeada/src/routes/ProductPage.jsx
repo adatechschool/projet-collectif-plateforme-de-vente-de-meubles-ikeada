@@ -61,6 +61,7 @@ const ProductPage = observer(() => {
     item.picture ||
     "https://www.arqueselectrodiesel.fr/wp-content/uploads/2022/08/photo-non-disponible-1.jpg";
   return (
+
     <>
       <Container
         className="d-flex flex-column justify-content-center align-items-center"
@@ -117,23 +118,23 @@ const ProductPage = observer(() => {
                 Dimensions :
                 {item.dimensions
                   ? item.dimensions.map((dimension, index) => (
-                      <span key={index}>
-                        {`${dimension * 0.1} cm`}
-                        {index < item.dimensions.length - 1 ? " x " : ""}
-                      </span>
-                    ))
+                    <span key={index}>
+                      {`${dimension * 0.1} cm`}
+                      {index < item.dimensions.length - 1 ? " x " : ""}
+                    </span>
+                  ))
                   : "Aucune dimension disponible"}
               </ListGroup.Item>
 
               {/* Afficher la couleur du produit */}
               {/* <ListGroup.Item className='d-flex flex-column justify-content-center align-items-center'>
-  Couleurs :
-  <Stack direction="horizontal" gap={2} className="d-flex flex-row justify-content-center">
-    {item.colors.map((color) => (
-      <Badge pill bg="secondary">{color}</Badge>
-    ))}
-  </Stack>
-</ListGroup.Item> */}
+                Couleurs :
+                <Stack direction="horizontal" gap={2} className="d-flex flex-row justify-content-center">
+                  {item.colors.map((color) => (
+                    <Badge pill style={bgColor} key={color.name}>{color.name}</Badge>
+                  ))}
+                </Stack>
+              </ListGroup.Item> */}
             </ListGroup>
           </Col>
           <Col

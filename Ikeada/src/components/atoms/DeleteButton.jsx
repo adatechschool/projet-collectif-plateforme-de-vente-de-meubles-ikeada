@@ -1,11 +1,10 @@
 import { TrashFill } from "react-bootstrap-icons"
 import { Button } from "react-bootstrap"
-import { itemsStore } from "../../stores/itemStore"
-import { PropTypes } from "mobx-react"
-export default function DeleteButton({ id }) {
+import PropTypes from "prop-types"
+import { observer } from 'mobx-react-lite'
+const DeleteButton = observer(({ item }) => {
     function del() {
-        console.log(id)
-        itemsStore.delItem(id)
+        item.archiveSelf()
     }
     return (
         <>
@@ -13,8 +12,10 @@ export default function DeleteButton({ id }) {
                 <TrashFill size={25} className="text-danger"></TrashFill>
             </Button>
         </>)
-}
+})
 
 DeleteButton.propTypes = {
-    id: PropTypes.string
+    item: PropTypes.object,
 }
+
+export default DeleteButton

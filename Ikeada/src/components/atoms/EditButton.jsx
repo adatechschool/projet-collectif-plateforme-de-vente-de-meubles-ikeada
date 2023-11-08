@@ -1,8 +1,11 @@
 import { PencilSquare } from "react-bootstrap-icons"
 import { Button } from "react-bootstrap"
-export default function EditButton() {
+import PropTypes from 'prop-types'
+import { observer } from 'mobx-react-lite'
+const EditButton = observer(({ item }) => {
 
     function editItem() {
+        console.log(item)
     }
     return (
         <>
@@ -10,4 +13,10 @@ export default function EditButton() {
                 <PencilSquare size={25} className="text-primary"></PencilSquare>
             </Button>
         </>)
+})
+
+export default EditButton
+
+EditButton.propTypes = {
+    item: PropTypes.object,
 }

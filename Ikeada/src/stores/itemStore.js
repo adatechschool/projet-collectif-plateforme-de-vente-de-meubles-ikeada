@@ -10,7 +10,7 @@ class itemStore {
   #service;
 
   // on lui dis que "items" et "currentItem" sont des trucs auxquels on va vouloir accèder
-  // et que setItems etc... sont des méthode pour y assigner des données
+  // et que #setItems etc... sont des méthode pour y assigner des données
   constructor(service) {
     // on instancie le service chargé des requêtes API directement dans le constructeur, comme ça les deux sont liés de manière permanente
     this.#service = service;
@@ -19,7 +19,6 @@ class itemStore {
       currentItem: observable,
       setItems: action,
       addItem: action,
-      delItem: action,
       setCurrentItem: action,
     });
   }
@@ -42,32 +41,25 @@ class itemStore {
 
   setItems(data) {
     this.items = data.map((el) => {
-      return new Item(el);
+      return new Item(el, interfaceBackEnd, this);
     });
   }
   setCurrentItem(data) {
-    this.currentItem = new Item(data);
+    this.currentItem = new Item(data, interfaceBackEnd, this);
   }
-  addItem(data) {
-    this.items.push(new Item(data));
-    this.#service.addItem(data);
+  async addItem(data) {
+    await this.#service.addItem(data);
+    this.#service.getItems()
   }
-  delItem(id) {
-    // purement "visuel" pour l'instant
-    // il faudra envoyer la requête au serveur et récupérer les données à jour
-    let index = this.items.indexOf(
-      this.items.find((item) => {
-        return item.id == id;
-      })
-    );
-    // supprime du tableau, mais ce qu'on voudra c'est simplement relancer getItem() vu que ça sera supprimé au niveaud de la BDD
-    this.items.splice(index, 1);
-    // this.items.splice(index, 1)
-  }
+
+
 }
 
 class Item {
-  constructor(data) {
+  #service
+  #store
+  constructor(data, service, store) {
+    this.#store = store
     this.id = data.id;
     this.name = data.name;
     this.desc = data.desc;
@@ -78,6 +70,46 @@ class Item {
     this.picture = data.picture;
     this.status = data.status;
     this.dimensions = data.dimensions;
+    this.archived = data.archived
+    this.colors = data.colors
+    this.#service = service
+  }
+  async delSelf() {
+    await this.#service.deleteItem(this.id)
+    await this.#store.getItems()
+  }
+  async archiveSelf() {
+    const data = { id: this.id, archived: true }
+    await this.#service.archiveItem(data)
+    await this.#store.getItems()
+  }
+  async restoreSelf() {
+    const data = { id: this.id, archived: true }
+    console.log(this)
+    await this.#service.restoreItem(data)
+    await this.#store.getItems()
+  }
+  async stashSelf() {
+    const data = { id: this.id, status: false }
+    console.log(this)
+
+    await this.#service.changeItemStatus(data)
+    await this.#store.getItems()
+  }
+  async publishSelf() {
+    const data = { id: this.id, status: true }
+    await this.#service.changeItemStatus(data)
+    await this.#store.getItems()
+  }
+  async setUnavailable() {
+    const data = { id: this.id, available: false }
+    await this.#service.changeItemStatus(data)
+    await this.#store.getItems()
+  }
+  async setAvailable() {
+    const data = { id: this.id, available: true }
+    await this.#service.changeItemStatus(data)
+    await this.#store.getItems()
   }
 }
 

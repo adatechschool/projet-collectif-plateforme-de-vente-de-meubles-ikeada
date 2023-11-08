@@ -46,13 +46,83 @@ class InterfaceBackEnd {
       .catch((error) => console.error("Erreur de chargement du JSON :", error));
   }
 
+  async archiveItem(itemData) {
+
+    return await fetch('/api/ikeada/admin/archiveItem', {
+      method: "POST",
+      headers: {
+        'Authorization': `Bearer ${this.#sessionStore.token}`,
+        'body': itemData,
+        'Content-Type': 'application/json'
+      },
+
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        return data;
+      })
+      .catch((error) => console.error("Erreur lors de l'archivage :", error));
+  }
+
+  async editItem(itemData) {
+    return await fetch('/api/ikeada/admin/editItem', {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${this.#sessionStore.token}`,
+        body: itemData,
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+        return data;
+      })
+      .catch((error) => console.error("Erreur lors de la tentative de suppression :", error));
+  }
+
+  async changeItemStatus(itemData) {
+    console.log(itemData)
+    return await fetch('/api/ikeada/admin/changeItemStatus', {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${this.#sessionStore.token}`,
+        body: itemData,
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+        return data;
+      })
+      .catch((error) => console.error("Erreur lors du changement de statut :" + error));
+  }
+
+
+  async deleteItem(itemData) {
+    return await fetch('/api/ikeada/admin/archiveItem', {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${this.#sessionStore.token}`,
+        body: itemData,
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+        return data;
+      })
+      .catch((error) => console.error("Erreur lors de la tentative de suppression :", error));
+  }
+
+
   // ajout d'un item dans la BDD
-  async addItem(data) {
+  async addItem(item) {
+    const itemData = { item: item }
     return await fetch(`/api/ikeada/admin/postItem`, {
       method: "POST",
       headers: {
         Authorization: `Bearer ${this.#sessionStore.token}`,
-        body: data,
+        body: itemData,
       },
     })
       .then((response) => response.json())

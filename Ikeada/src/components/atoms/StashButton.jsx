@@ -1,14 +1,22 @@
 import { XSquare } from "react-bootstrap-icons";
 import { Button } from "react-bootstrap";
-export default function StashButton() {
-    function stashItem() {
-        console.log("stash")
-        // trigger UPDATE request for status
+import PropTypes from "prop-types"
+import { observer } from 'mobx-react-lite'
+
+const StashButton = observer(({ item }) => {
+    function stash() {
+        item.stashSelf()
     }
     return (
         <>
-            <Button variant="transparent"  onClick={stashItem}>
+            <Button variant="transparent" onClick={stash}>
                 <XSquare size={25} className="text-warning"></XSquare>
             </Button>
         </>)
+})
+
+StashButton.propTypes = {
+    item: PropTypes.object
 }
+
+export default StashButton

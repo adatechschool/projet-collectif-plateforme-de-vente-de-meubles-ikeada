@@ -1,15 +1,15 @@
 import { PropTypes } from "prop-types";
-import TableActions from "./TableActions";
-import TableStatus from "./TableStatus";
+import  TableActions  from "./TableActions";
+import  TableStatus  from "./TableStatus";
 
-export default function BackOfficeItem({ name, id, price, status, available }) {
+export default function BackOfficeItem({ item }) {
   return (
     <>
       <tr className="fs-5">
-        <td>{name}</td>
-        <td className="text-center">{price / 100} €</td>
-        <TableStatus status={status} available={available} />
-        {<TableActions status={status} available={available} id={id} />}
+        <td>{item.name}</td>
+        <td className="text-center">{item.price / 100} €</td>
+        <TableStatus item={item} />
+        {<TableActions item={item} />}
       </tr>
     </>
   );
@@ -17,9 +17,7 @@ export default function BackOfficeItem({ name, id, price, status, available }) {
 
 // vérification du type des props
 BackOfficeItem.propTypes = {
+  item: PropTypes.object,
   name: PropTypes.string,
   price: PropTypes.number,
-  status: PropTypes.bool,
-  available: PropTypes.bool,
-  id: PropTypes.string
 };

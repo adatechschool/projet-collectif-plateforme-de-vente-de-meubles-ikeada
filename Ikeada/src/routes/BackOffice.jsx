@@ -28,13 +28,8 @@ const BackOffice = observer(() => {
                 <tbody>
                     {/* insère les lignes du tableau */}
                     {items.map((item) => {
-                        return (<BackOfficeItem name={item.name}
-                            status={item.status}
-                            available={item.available}
-                            price={item.price}
-                            id={item.id}
-                            key={item.name} 
-                            />)
+                        return (<BackOfficeItem item={item} key={item.id}
+                        />)
                     })}
                 </tbody>
             </Table>

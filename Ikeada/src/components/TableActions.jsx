@@ -4,39 +4,40 @@ import DeleteButton from "./atoms/DeleteButton";
 import EditButton from "./atoms/EditButton";
 import StashButton from "./atoms/StashButton";
 import PublishButton from "./atoms/PublishButton";
+import { observer } from 'mobx-react-lite'
 
 // ce composant affiche différents boutons selon le statut et la disponibilité du meuble
-export default function TableActions({ status, available, id }) {
+const TableActions = observer(({ item }) => {
 
-  if (status && available) {
+  if (item.status && item.available) {
     return (
       <td direction="horizontal" className="text-center">
-        <EditButton id={id} />
-        <StashButton id={id} />
-        <DeleteButton id={id} />
+        <EditButton item={item} />
+        <StashButton item={item} />
+        <DeleteButton item={item} />
       </td>
     );
-  } else if (available) {
+  } else if (item.available) {
     return (
       <td direction="horizontal" className="text-center">
-        <EditButton id={id} />
-        <PublishButton id={id} />
-        <DeleteButton id={id} />
+        <EditButton item={item} />
+        <PublishButton item={item} />
+        <DeleteButton item={item} />
       </td>
     );
   } else {
     return (
       <td direction="horizontal" className="text-center">
-        <EditButton id={id} />
-        <DeleteButton id={id} />
+        <EditButton item={item} />
+        <DeleteButton item={item} />
       </td>
     );
   }
-}
+})
 
 // vérification du type des props
 TableActions.propTypes = {
-  status: PropTypes.bool,
-  available: PropTypes.bool,
-  id: PropTypes.string
+  item: PropTypes.object,
 };
+
+export default TableActions

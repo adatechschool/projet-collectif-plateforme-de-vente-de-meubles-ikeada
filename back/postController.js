@@ -52,12 +52,38 @@ export const editItem = async (req, res) => {
     }
 
     const colorRes = await addItemColors(colorsData, itemData.id)
-   
+
     return res
       .status(201)
       .send(
         " Item modifié : " + data + ", couleurs : " + colorRes
       );
+  }
+};
+
+export const changeItemStatus = async (req, res) => {
+  const jsonData = req.body;
+  console.log(jsonData)
+  if (jsonData.archived) {
+    return res
+      .status(403)
+      .send(
+        "Interdit : les items ne peuvent pas être modifiés et archivés en même temps"
+      );
+  } else {
+    const { data, error } = await supabaseAd.from("ITEM").update([jsonData]).select().eq("id", jsonData.id)
+    console.log(jsonData.id)
+
+    if (error) {
+      console.log(error)
+      return res.status(403)
+        .send(`Echec de la modification de l'item (id :'${jsonData.id}'), Supabase_error: ${error.message}
+      `);
+    }
+    console.log(data)
+    return res.status(201).json(
+      " Statut modifié : " + data
+    );
   }
 };
 
